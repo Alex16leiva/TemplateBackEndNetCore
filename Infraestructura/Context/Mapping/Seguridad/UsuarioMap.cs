@@ -13,7 +13,7 @@ namespace Infraestructura.Context.Mapping.Seguridad
             builder.Property(r => r.UsuarioId).HasColumnName("UsuarioId").IsRequired().IsUnicode(false).HasMaxLength(25);
             builder.Property(r => r.Nombre).HasColumnName("Nombre").IsRequired().HasMaxLength(50);
             builder.Property(r => r.Apellido).HasColumnName("Apellido").IsRequired().HasMaxLength(50);
-            builder.Property(r => r.Contrasena).HasColumnName("Contrasena").IsRequired().HasMaxLength(25);
+            builder.Property(r => r.Contrasena).HasColumnName("Contrasena").IsRequired().HasMaxLength(250);
             builder.Property(r => r.RolId).HasColumnName("RolId").IsRequired().IsUnicode(false).HasMaxLength(25);
 
             base.Configure(builder);

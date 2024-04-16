@@ -8,6 +8,6 @@
 
     public class CreateUserRequest : RequestBase
     {
-
+        public UsuarioDTO Usuario { get; set; }
     }
 }

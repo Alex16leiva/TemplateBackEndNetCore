@@ -1,7 +1,9 @@
 ﻿using Aplicacion.DTOs.Seguridad;
 using Aplicacion.Helpers;
+using Dominio.Context.Entidades;
 using Dominio.Context.Entidades.Seguridad;
 using Dominio.Core;
+using Dominio.Core.Extensions;
 using Infraestructura.Context;
 
 namespace Aplicacion.Services
@@ -17,21 +19,35 @@ namespace Aplicacion.Services
 
         public UsuarioDTO CrearUsuario(CreateUserRequest request)
         {
+            string mensajeValidacion = request.Usuario.ValidarCampos();
+
+            if (mensajeValidacion.HasValue())
+            {
+                return new UsuarioDTO
+                {
+                    Message = request.Usuario.Message,
+                };
+            }
+
+            Usuario usuarioExiste = _genericRepository.GetSingle<Usuario>(r => r.UsuarioId == request.Usuario.UsuarioId);
+
+            if (usuarioExiste.IsNotNull())
+            {
+                return new UsuarioDTO
+                {
+                    Message = "Usuario ya esta registrado"
+                };
+            }
+
             var usuario = new Usuario
             {
-                Apellido = "castellanos",
-                Contrasena = "1",
-                Nombre = "Ashlee",
-                RolId = "1",
-                UsuarioId = "ashlee",
+                Apellido = request.Usuario.Apellido.ValueOrEmpty(),
+                Contrasena = PasswordEncryptor.Encrypt(request.Usuario.Contrasena),
+                Nombre = request.Usuario.Apellido.ValueOrEmpty(),
+                RolId = request.Usuario.RolId.ValueOrEmpty(),
+                UsuarioId = request.Usuario.UsuarioId.ValueOrEmpty(),
             };
-            var rol = new Rol
-            {
-                RolId = "Admin",
-                Descripcion = "Administrador",
-            };
-
-            _genericRepository.Add(rol);
+            
             _genericRepository.Add(usuario);
             TransactionInfo transactionInfo = request.RequestUserInfo.CrearTransactionInfo("AgregarUsuario");
             _genericRepository.UnitOfWork.Commit(transactionInfo);
@@ -41,9 +57,12 @@ namespace Aplicacion.Services
         public UsuarioDTO IniciarSesion(UserRequest request)
         {
             List<string> includes = new List<string> { "Rol" };
-            Usuario usuario = _genericRepository.GetSingle<Usuario>(r => r.UsuarioId == request.UsuarioId && r.Contrasena == request.Password);
 
-            if (usuario != null)
+            string passwordEncrypted = PasswordEncryptor.Encrypt(request.Password);
+
+            Usuario usuario = _genericRepository.GetSingle<Usuario>(r => r.UsuarioId == request.UsuarioId && r.Contrasena == passwordEncrypted);
+
+            if (usuario.IsNotNull())
             {
                 return new UsuarioDTO
                 {
