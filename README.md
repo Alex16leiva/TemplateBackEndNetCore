@@ -9,6 +9,7 @@ Este es un template, para iniciar nuevos proyectos, esta hecho en C# Asp.net Cor
 - AutoMapper
 - BCrypt
 - Swagger
+- JWT
 
 ## Instalación
 
