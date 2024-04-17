@@ -1,6 +1,7 @@
 using Aplicacion.Services;
 using Infraestructura.Context;
 using Microsoft.EntityFrameworkCore;
+using WebServices.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,7 +34,7 @@ builder.Services.AddTransient(typeof(IGenericRepository<>), typeof(GenericReposi
 
 builder.Services.AddScoped<SecurityAplicationService>();
 
-//builder.Services.AddScoped<GenericRepository<IDataContext>
+builder.Services.AddTransient<GlobalExceptionHandlingMiddleware>();
 
 var app = builder.Build();
 
@@ -47,6 +48,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
 
 app.MapControllers();
 
