@@ -1,9 +1,12 @@
 using Aplicacion.Services;
 using Infraestructura.Context;
+using Infraestructura.Core.Jwtoken;
 using Microsoft.EntityFrameworkCore;
+using WebServices.Jwtoken;
 using WebServices.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
+
 
 // Add services to the container.
 
@@ -11,6 +14,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.ConfigureJwt();
 
 const string AllowAllOriginsPolicy = "AllowAllOriginsPolicy";
 
@@ -31,6 +36,7 @@ builder.Services.AddDbContext<MyContext>(
 
 builder.Services.AddTransient<IDataContext, MyContext>();
 builder.Services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+builder.Services.AddTransient<ITokenService, JwtTokenService>();
 
 builder.Services.AddScoped<SecurityAplicationService>();
 
@@ -46,7 +52,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseMiddleware<GlobalExceptionHandlingMiddleware>();

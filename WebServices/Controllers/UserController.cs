@@ -29,8 +29,7 @@ namespace WebServices.Controllers
             return user;
         }
 
-        //[Authorize]
-        //[Authorize]
+        [Authorize]
         [Route("")]
         [HttpPost]
         public UsuarioDTO CreateUser(CreateUserRequest request)

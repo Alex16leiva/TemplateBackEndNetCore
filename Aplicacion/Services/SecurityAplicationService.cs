@@ -5,16 +5,19 @@ using Dominio.Context.Entidades.Seguridad;
 using Dominio.Core;
 using Dominio.Core.Extensions;
 using Infraestructura.Context;
+using Infraestructura.Core.Jwtoken;
 
 namespace Aplicacion.Services
 {
     public class SecurityAplicationService
     {
         private readonly IGenericRepository<IDataContext> _genericRepository;
+        private readonly ITokenService _tokenService;
 
-        public SecurityAplicationService(IGenericRepository<IDataContext> genericRepository)
+        public SecurityAplicationService(IGenericRepository<IDataContext> genericRepository, ITokenService tokenService)
         {
             _genericRepository = genericRepository;
+            _tokenService = tokenService;
         }
 
         public UsuarioDTO CrearUsuario(CreateUserRequest request)
@@ -69,6 +72,7 @@ namespace Aplicacion.Services
                     UsuarioId = usuario.UsuarioId,
                     Apellido = usuario.Apellido,
                     Nombre = usuario.Nombre,
+                    Token = _tokenService.Generate(usuario)
                 };
             }
 
