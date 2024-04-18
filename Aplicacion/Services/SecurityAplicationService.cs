@@ -1,5 +1,6 @@
 ﻿using Aplicacion.DTOs.Seguridad;
 using Aplicacion.Helpers;
+using AutoMapper;
 using Dominio.Context.Entidades;
 using Dominio.Context.Entidades.Seguridad;
 using Dominio.Core;
@@ -13,11 +14,13 @@ namespace Aplicacion.Services
     {
         private readonly IGenericRepository<IDataContext> _genericRepository;
         private readonly ITokenService _tokenService;
+        private readonly IMapper _mapper;
 
-        public SecurityAplicationService(IGenericRepository<IDataContext> genericRepository, ITokenService tokenService)
+        public SecurityAplicationService(IGenericRepository<IDataContext> genericRepository, ITokenService tokenService, IMapper mapper)
         {
             _genericRepository = genericRepository;
             _tokenService = tokenService;
+            _mapper = mapper;
         }
 
         public UsuarioDTO CrearUsuario(CreateUserRequest request)
@@ -54,7 +57,7 @@ namespace Aplicacion.Services
             _genericRepository.Add(usuario);
             TransactionInfo transactionInfo = request.RequestUserInfo.CrearTransactionInfo("AgregarUsuario");
             _genericRepository.UnitOfWork.Commit(transactionInfo);
-            return new UsuarioDTO();
+            return _mapper.Map<UsuarioDTO>(usuario);
         }
 
         public UsuarioDTO IniciarSesion(UserRequest request)
@@ -67,13 +70,9 @@ namespace Aplicacion.Services
 
             if (usuario.IsNotNull())
             {
-                return new UsuarioDTO
-                {
-                    UsuarioId = usuario.UsuarioId,
-                    Apellido = usuario.Apellido,
-                    Nombre = usuario.Nombre,
-                    Token = _tokenService.Generate(usuario)
-                };
+                usuario.Token = _tokenService.Generate(usuario);
+
+                return _mapper.Map<UsuarioDTO>(usuario);
             }
 
             return new UsuarioDTO

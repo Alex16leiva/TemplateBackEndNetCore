@@ -1,3 +1,4 @@
+using Aplicacion.Core;
 using Aplicacion.Services;
 using Infraestructura.Context;
 using Infraestructura.Core.Jwtoken;
@@ -16,6 +17,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.ConfigureJwt();
+
+builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
 const string AllowAllOriginsPolicy = "AllowAllOriginsPolicy";
 

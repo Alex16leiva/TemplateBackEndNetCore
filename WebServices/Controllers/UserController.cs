@@ -21,12 +21,9 @@ namespace WebServices.Controllers
         [HttpGet]
         public UsuarioDTO Login([FromQuery] UserRequest request)
         {
-            UsuarioDTO user = _securityAppService.IniciarSesion(request);
+            UsuarioDTO usuario = _securityAppService.IniciarSesion(request);
 
-           
-
-            //return the token
-            return user;
+            return usuario;
         }
 
         [Authorize]
@@ -34,9 +31,9 @@ namespace WebServices.Controllers
         [HttpPost]
         public UsuarioDTO CreateUser(CreateUserRequest request)
         {
-            UsuarioDTO user = _securityAppService.CrearUsuario(request);
+            UsuarioDTO usuario = _securityAppService.CrearUsuario(request);
 
-            return user ;
+            return usuario ;
         }
     }
 }

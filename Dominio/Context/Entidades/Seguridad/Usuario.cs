@@ -1,4 +1,5 @@
 ﻿using Dominio.Core;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Dominio.Context.Entidades.Seguridad
 {
@@ -10,6 +11,8 @@ namespace Dominio.Context.Entidades.Seguridad
         public string Apellido { get; set; }
         public string RolId { get; set; }
 
+        [NotMapped]
+        public string Token { get; set; }
         //public virtual Rol Rol { get; set; }
     }
 }
