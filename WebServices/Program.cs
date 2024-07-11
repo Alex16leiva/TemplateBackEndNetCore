@@ -2,6 +2,7 @@ using Aplicacion.Core;
 using Aplicacion.Services;
 using Infraestructura.Context;
 using Infraestructura.Core.Jwtoken;
+using Infraestructura.Core.RestClient;
 using Microsoft.EntityFrameworkCore;
 using WebServices.Jwtoken;
 using WebServices.Middleware;
@@ -39,7 +40,14 @@ builder.Services.AddDbContext<MyContext>(
 
 builder.Services.AddTransient<IDataContext, MyContext>();
 builder.Services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+//Register Json Web Token
 builder.Services.AddTransient<ITokenService, JwtTokenService>();
+
+
+RestClientFactory.SetCurrent(new HttpRestClientFactory());
+//builder.Services.AddTransient<IRestClient, HttpRestClient>();
+//builder.Services.AddTransient<IRestClientFactory, HttpRestClientFactory>();
 
 builder.Services.AddScoped<SecurityAplicationService>();
 
