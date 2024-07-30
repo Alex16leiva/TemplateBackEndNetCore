@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infraestructura.Context.Mapping.Seguridad
 {
-    public class UsuarioMap : EntityMap<Usuario>
+    internal class UsuarioMap : EntityMap<Usuario>
     {
         public override void Configure(EntityTypeBuilder<Usuario> builder)
         {

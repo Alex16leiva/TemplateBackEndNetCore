@@ -11,9 +11,9 @@ namespace WebServices.Controllers
         [AllowAnonymous]
         [Route("")]
         [HttpGet]
-        public principal getData()
+        public Principal getData()
         {
-            var response = new principal();
+            var response = new Principal();
             Task.Run(async () =>
             {
                 response = await getExample();
@@ -29,11 +29,11 @@ namespace WebServices.Controllers
             return response;
         }
 
-        private async Task<principal> getExample()
+        private async Task<Principal> getExample()
         {
             string baseUri = "https://coderbyte.com";
             string uri = "/api/challenges/json/json-cleaning";
-            return await RestClientFactory.CreateClient(baseUri).GetAsync<principal>(uri);
+            return await RestClientFactory.CreateClient(baseUri).GetAsync<Principal>(uri);
         }
 
 
@@ -54,31 +54,31 @@ namespace WebServices.Controllers
 
     public class MethodPostResponse
     {
-        public Args Args { get; set; }
-        public Args Data { get; set; }
-        public Args Files { get; set; }
+        public Args? Args { get; set; }
+        public Args? Data { get; set; }
+        public Args? Files { get; set; }
     }
 
     public class Args 
     {
-        public string Test { get; set; }
-        public string host { get; set; }
-        public string cookie { get; set; }
+        public string? Test { get; set; }
+        public string? host { get; set; }
+        public string? cookie { get; set; }
     }
 
 
-    public class principal
+    public class Principal
     {
-        public Name Name { get; set; }
-        public int Age { get; set; }
+        public Name? Name { get; set; }
+        public int? Age { get; set; }
     }
 
     public class Name
     {
 
-        public string First { get; set; }
-        public string middle { get; set; }
-        public string last { get; set; }
+        public string? First { get; set; }
+        public string? middle { get; set; }
+        public string? last { get; set; }
         //{"name":{"first":"Robert","middle":"","last":"Smith"},"age":25,"DOB":"-","hobbies":["running","coding","-"],"education":{"highschool":"N\/A","college":"Yale"}}
     }
 }

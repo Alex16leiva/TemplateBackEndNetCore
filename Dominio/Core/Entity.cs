@@ -17,7 +17,7 @@ namespace Dominio.Core
             ModificadoPor = modificadoPor;
         }
 
-        public string ModificadoPor { get; set; }
+        public string? ModificadoPor { get; set; }
         public DateTime FechaTransaccion { get; set; }
         public string DescripcionTransaccion { get; set; }
         public byte[] RowVersion { get; set; }

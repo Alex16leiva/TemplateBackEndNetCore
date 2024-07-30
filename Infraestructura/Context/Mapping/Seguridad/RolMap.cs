@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infraestructura.Context.Mapping.Seguridad
 {
-    public class RolMap : EntityMap<Rol>
+    internal class RolMap : EntityMap<Rol>
     {
         public override void Configure(EntityTypeBuilder<Rol> builder)
         {

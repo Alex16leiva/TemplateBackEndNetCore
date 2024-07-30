@@ -80,7 +80,7 @@
 
         }
 
-        public static string GetStringFromList<t>(this IEnumerable<t> collection, string separator)
+        public static string GetStringFromList<T>(this IEnumerable<T> collection, string separator)
         {
             if (collection.HasItems())
             {
