@@ -1,4 +1,5 @@
-﻿using Aplicacion.DTOs.Seguridad;
+﻿using Aplicacion.Core;
+using Aplicacion.DTOs.Seguridad;
 using Aplicacion.Helpers;
 using AutoMapper;
 using Dominio.Context.Entidades;
@@ -10,7 +11,7 @@ using Infraestructura.Core.Jwtoken;
 
 namespace Aplicacion.Services
 {
-    public class SecurityAplicationService
+    public class SecurityAplicationService : BaseDisposable
     {
         private readonly IGenericRepository<IDataContext> _genericRepository;
         private readonly ITokenService _tokenService;
@@ -79,6 +80,17 @@ namespace Aplicacion.Services
             {
                 Message = "Usuario o Contraseña no valido"
             };
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (_genericRepository.IsNotNull()) _genericRepository.Dispose();
+                
+            }
+
+            base.Dispose(disposing);
         }
     }
 }
