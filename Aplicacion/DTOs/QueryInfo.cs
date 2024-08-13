@@ -25,7 +25,7 @@ namespace Aplicacion.DTOs
         /// <summary>
         /// The list of fields to be sorted in the query.
         /// </summary>
-        public List<string> SortFields { get; set; }
+        public List<string>? SortFields { get; set; }
 
         /// <summary>
         /// Indicates if the query will sort the result in ascending order.
@@ -35,7 +35,7 @@ namespace Aplicacion.DTOs
         /// <summary>
         /// A custom filter to apply to the query.
         /// </summary>
-        public string Predicate { get; set; }
+        public string? Predicate { get; set; }
 
         /// <summary>
         /// The parameters that will be applied to the query.
@@ -45,12 +45,12 @@ namespace Aplicacion.DTOs
         /// <summary>
         /// The names of tables to be included in the query, this is used to eagerly load those tables and avoid to scan the table.
         /// </summary>
-        public List<string> Includes { get; set; }
+        public List<string>? Includes { get; set; }
 
         /// <summary>
         /// The Custom Query Operation to Perform.
         /// </summary>
-        public string CustomQueryOperation { get; set; }
+        public string? CustomQueryOperation { get; set; }
 
         public Dictionary<string, object> CustomFilters { get; set; }
 

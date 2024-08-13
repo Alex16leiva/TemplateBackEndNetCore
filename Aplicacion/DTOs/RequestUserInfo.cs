@@ -2,6 +2,6 @@
 {
     public class RequestUserInfo
     {
-        public string UsuarioId { get; set; }
+        public string? UsuarioId { get; set; }
     }
 }

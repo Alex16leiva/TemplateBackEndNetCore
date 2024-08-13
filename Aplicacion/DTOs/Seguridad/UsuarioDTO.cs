@@ -5,13 +5,16 @@ namespace Aplicacion.DTOs.Seguridad
 {
     public class UsuarioDTO : ResponseBase
     {
-        public required string UsuarioId { get; set; }
-        public required string Nombre { get; set; }
-        public required string Apellido { get; set; }
-        public required string Contrasena { get; set; }
+        public string? UsuarioId { get; set; }
+        public string? Nombre { get; set; }
+        public string? Apellido { get; set; }
+        public string? Contrasena { get; set; }
         public string? Token { get; set; }
+        public bool UsuarioAutenticado { get; set; }
         public string? RolId { get; set; }
-
+        public bool EditarContrasena { get; set; } = true;
+        public bool Activo { get; set; }
+        public List<PermisosDTO>? Permisos { get; set; }
 
         public string ValidarCampos()
         {
@@ -25,11 +28,11 @@ namespace Aplicacion.DTOs.Seguridad
             {
                 mensajeValidacion.AppendLine("El nombre es requerido");
             }
-            if (Apellido.IsMissingValue()) 
+            if (Apellido.IsMissingValue())
             {
                 mensajeValidacion.AppendLine("El apellido es requerido");
             }
-            if (Contrasena.IsMissingValue())
+            if (EditarContrasena && Contrasena.IsMissingValue())
             {
                 mensajeValidacion.AppendLine("La contraña es requerida");
             }

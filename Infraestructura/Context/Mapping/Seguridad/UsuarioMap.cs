@@ -15,6 +15,9 @@ namespace Infraestructura.Context.Mapping.Seguridad
             builder.Property(r => r.Apellido).HasColumnName("Apellido").IsRequired().HasMaxLength(50);
             builder.Property(r => r.Contrasena).HasColumnName("Contrasena").IsRequired().HasMaxLength(250);
             builder.Property(r => r.RolId).HasColumnName("RolId").IsRequired().IsUnicode(false).HasMaxLength(25);
+            builder.Property(r => r.Activo).HasColumnName("Activo").IsRequired();
+
+            builder.HasOne(x => x.Rol).WithMany(r => r.Usuarios).HasForeignKey(x => x.RolId);
 
             base.Configure(builder);
         }

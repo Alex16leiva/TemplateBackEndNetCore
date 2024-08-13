@@ -16,11 +16,15 @@ namespace Infraestructura.Context
 
         public virtual DbSet<Usuario> Usuarios { get; set; }
         public virtual DbSet<Rol> Rol {  get; set; }
+        public virtual DbSet<Pantalla> Pantalla { get; set; }
+        public virtual DbSet<Permisos> Permisos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new UsuarioMap());
-            modelBuilder.ApplyConfiguration(new RolMap());  
+            modelBuilder.ApplyConfiguration(new RolMap());
+            modelBuilder.ApplyConfiguration(new PantallaMap());
+            modelBuilder.ApplyConfiguration(new PermisosMap());
             base.OnModelCreating(modelBuilder);
         }
 
