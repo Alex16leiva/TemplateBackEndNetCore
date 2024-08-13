@@ -71,14 +71,21 @@ namespace Aplicacion.Services
 
             if (usuario.IsNotNull())
             {
-                usuario.Token = _tokenService.Generate(usuario);
-
-                return _mapper.Map<UsuarioDTO>(usuario);
+                return new UsuarioDTO
+                {
+                    Apellido = usuario.Apellido,
+                    Nombre = usuario.Nombre,
+                    RolId = usuario.RolId,
+                    Token = _tokenService.Generate(usuario),
+                    UsuarioAutenticado = true,
+                    UsuarioId = usuario.UsuarioId
+                };
             }
 
             return new UsuarioDTO
             {
-                Message = "Usuario o Contraseña no valido"
+                Message = "Usuario o Contraseña no valido",
+                UsuarioAutenticado = false
             };
         }
 
