@@ -5,12 +5,12 @@ namespace Aplicacion.DTOs.Seguridad
 {
     public class UsuarioDTO : ResponseBase
     {
-        public string UsuarioId { get; set; }
-        public string Nombre { get; set; }
-        public string Apellido { get; set; }
-        public string Contrasena { get; set; }
-        public string Token { get; set; }
-        public string RolId { get; set; }
+        public required string UsuarioId { get; set; }
+        public required string Nombre { get; set; }
+        public required string Apellido { get; set; }
+        public required string Contrasena { get; set; }
+        public string? Token { get; set; }
+        public string? RolId { get; set; }
 
 
         public string ValidarCampos()
