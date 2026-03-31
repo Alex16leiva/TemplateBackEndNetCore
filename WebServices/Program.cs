@@ -1,5 +1,6 @@
-using Aplicacion.Core;
+﻿using Aplicacion.Core;
 using Aplicacion.Services;
+using CrossCutting.Configuration;
 using Infraestructura.Context;
 using Infraestructura.Core.Jwtoken;
 using Infraestructura.Core.RestClient;
@@ -32,10 +33,13 @@ builder.Services.AddCors(options =>
         });
 });
 
-string conectionString = builder.Configuration.GetConnectionString("conectionDataBase");
+string connectionString = builder.Configuration.GetConnectionString("conectionDataBase");
+
+// ✅ Inicialización única — carga la tabla ConfiguracionesDetalle en memoria
+AppSettingsManager.Initialize(connectionString);
 
 builder.Services.AddDbContext<MyContext>(
-        dbContextOption => dbContextOption.UseSqlServer(conectionString), ServiceLifetime.Transient
+        dbContextOption => dbContextOption.UseSqlServer(connectionString), ServiceLifetime.Transient
     );
 
 builder.Services.AddTransient<IDataContext, MyContext>();
