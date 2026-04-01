@@ -164,3 +164,74 @@ CREATE TABLE [Seguridad].[Usuario_Transacciones](
     [TipoTransaccion] [varchar](50) NOT NULL,
     [TransaccionUId] [uniqueidentifier] NOT NULL
 ) ON [PRIMARY];
+
+CREATE TABLE [Comunes].[Configuraciones](
+	[ConfiguracionId] [varchar](150) NOT NULL,
+	[Descripcion] [varchar](100) NOT NULL,
+	[FechaTransaccion] [datetime] NOT NULL,
+	[DescripcionTransaccion] [varchar](50) NOT NULL,
+	[ModificadoPor] [varchar](20) NOT NULL,
+	[RowVersion] [timestamp] NOT NULL,
+	[TipoTransaccion] [varchar](50) NOT NULL,
+	[TransaccionUId] [uniqueidentifier] NOT NULL,
+ CONSTRAINT [PK_Configuraciones] PRIMARY KEY CLUSTERED 
+(
+	[ConfiguracionId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [Comunes].[Configuraciones_Transacciones](
+	[Uid] [int] IDENTITY(1,1) NOT NULL,
+	[ConfiguracionId] [varchar](150) NOT NULL,
+	[Descripcion] [varchar](100) NOT NULL,
+	[FechaTransaccion] [datetime] NOT NULL,
+	[DescripcionTransaccion] [varchar](50) NOT NULL,
+	[ModificadoPor] [varchar](20) NOT NULL,
+	[RowVersion] [timestamp] NOT NULL,
+	[TipoTransaccion] [varchar](50) NOT NULL,
+	[TransaccionUId] [uniqueidentifier] NOT NULL,
+ CONSTRAINT [PK_Configuraciones_Transacciones] PRIMARY KEY CLUSTERED 
+(
+	[Uid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [Comunes].[ConfiguracionesDetalle](
+	[ConfiguracionId] [varchar](150) NOT NULL,
+	[Atributo] [varchar](150) NOT NULL,
+	[Valor] [varbinary](150) NOT NULL,
+	[Descripcion] [varchar](100) NOT NULL,
+	[FechaTransaccion] [datetime] NOT NULL,
+	[DescripcionTransaccion] [varchar](50) NOT NULL,
+	[ModificadoPor] [varchar](20) NOT NULL,
+	[RowVersion] [timestamp] NOT NULL,
+	[TipoTransaccion] [varchar](50) NOT NULL,
+	[TransaccionUId] [uniqueidentifier] NOT NULL,
+ CONSTRAINT [PK_ConfiguracionesDetalle] PRIMARY KEY CLUSTERED 
+(
+	[ConfiguracionId] ASC,
+	[Atributo] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [Comunes].[ConfiguracionesDetalle_Transacciones](
+	[Uid] [int] IDENTITY(1,1) NOT NULL,
+	[ConfiguracionId] [varchar](150) NOT NULL,
+	[Atributo] [varchar](150) NOT NULL,
+	[Valor] [varbinary](150) NOT NULL,
+	[Descripcion] [varchar](100) NOT NULL,
+	[FechaTransaccion] [datetime] NOT NULL,
+	[DescripcionTransaccion] [varchar](50) NOT NULL,
+	[ModificadoPor] [varchar](20) NOT NULL,
+	[RowVersion] [timestamp] NOT NULL,
+	[TipoTransaccion] [varchar](50) NOT NULL,
+	[TransaccionUId] [uniqueidentifier] NOT NULL,
+ CONSTRAINT [PK_ConfiguracionesDetalle_Transacciones] PRIMARY KEY CLUSTERED 
+(
+	[Uid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
