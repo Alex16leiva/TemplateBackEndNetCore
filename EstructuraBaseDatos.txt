@@ -201,7 +201,7 @@ GO
 CREATE TABLE [Comunes].[ConfiguracionesDetalle](
 	[ConfiguracionId] [varchar](150) NOT NULL,
 	[Atributo] [varchar](150) NOT NULL,
-	[Valor] [varbinary](150) NOT NULL,
+	[Valor] [varchar](150) NOT NULL,
 	[Descripcion] [varchar](100) NOT NULL,
 	[FechaTransaccion] [datetime] NOT NULL,
 	[DescripcionTransaccion] [varchar](50) NOT NULL,
@@ -221,7 +221,7 @@ CREATE TABLE [Comunes].[ConfiguracionesDetalle_Transacciones](
 	[Uid] [int] IDENTITY(1,1) NOT NULL,
 	[ConfiguracionId] [varchar](150) NOT NULL,
 	[Atributo] [varchar](150) NOT NULL,
-	[Valor] [varbinary](150) NOT NULL,
+	[Valor] [varchar](150) NOT NULL,
 	[Descripcion] [varchar](100) NOT NULL,
 	[FechaTransaccion] [datetime] NOT NULL,
 	[DescripcionTransaccion] [varchar](50) NOT NULL,
