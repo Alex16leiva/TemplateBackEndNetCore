@@ -10,7 +10,7 @@ using Dominio.Core.Extensions;
 using Infraestructura.Context;
 using Infraestructura.Core.Jwtoken;
 
-namespace Aplicacion.Services
+namespace Aplicacion.Services.Seguridad
 {
     public class SecurityAplicationService : BaseDisposable
     {

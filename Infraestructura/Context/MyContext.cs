@@ -1,5 +1,7 @@
-﻿using Dominio.Context.Entidades.Seguridad;
+﻿using Dominio.Context.Entidades.ConfiguracionesAgg;
+using Dominio.Context.Entidades.Seguridad;
 using Dominio.Core;
+using Infraestructura.Context.Mapping.ConfiguracionesMap;
 using Infraestructura.Context.Mapping.Seguridad;
 using Infraestructura.Core;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +20,8 @@ namespace Infraestructura.Context
         public virtual DbSet<Rol> Rol {  get; set; }
         public virtual DbSet<Pantalla> Pantalla { get; set; }
         public virtual DbSet<Permisos> Permisos { get; set; }
+        public virtual DbSet<Configuraciones> Configuraciones { get; set; }
+        public virtual DbSet<ConfiguracionesDetalle> ConfiguracionesDetalle { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -25,6 +29,8 @@ namespace Infraestructura.Context
             modelBuilder.ApplyConfiguration(new RolMap());
             modelBuilder.ApplyConfiguration(new PantallaMap());
             modelBuilder.ApplyConfiguration(new PermisosMap());
+            modelBuilder.ApplyConfiguration(new ConfiguracionesMap());
+            modelBuilder.ApplyConfiguration(new ConfiguracionesDetalleMap());
             base.OnModelCreating(modelBuilder);
         }
 

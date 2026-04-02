@@ -1,6 +1,6 @@
 ﻿using Aplicacion.DTOs;
 using Aplicacion.DTOs.Seguridad;
-using Aplicacion.Services;
+using Aplicacion.Services.Seguridad;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

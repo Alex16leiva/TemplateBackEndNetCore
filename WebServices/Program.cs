@@ -1,5 +1,6 @@
 ﻿using Aplicacion.Core;
-using Aplicacion.Services;
+using Aplicacion.Services.ConfiguracionesApp;
+using Aplicacion.Services.Seguridad;
 using CrossCutting.Configuration;
 using Infraestructura.Context;
 using Infraestructura.Core.Jwtoken;
@@ -54,6 +55,7 @@ RestClientFactory.SetCurrent(new HttpRestClientFactory());
 //builder.Services.AddTransient<IRestClientFactory, HttpRestClientFactory>();
 
 builder.Services.AddScoped<SecurityAplicationService>();
+builder.Services.AddScoped<IConfiguracionesApplicationService, ConfiguracionesApplicationService>();
 
 builder.Services.AddTransient<GlobalExceptionHandlingMiddleware>();
 

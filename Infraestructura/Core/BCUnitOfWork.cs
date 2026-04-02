@@ -101,7 +101,7 @@ namespace Infraestructura.Core
             finally
             {
 
-                base.Database.CloseConnection();
+                base.Database.CloseConnection();    
             }
         }
 

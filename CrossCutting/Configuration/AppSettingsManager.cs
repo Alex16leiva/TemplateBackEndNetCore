@@ -95,7 +95,7 @@ namespace CrossCutting.Configuration
                     SELECT [ConfiguracionId],
                            [Atributo],
                            [Valor]
-                    FROM   [dbo].[ConfiguracionesDetalle]
+                    FROM   [Comunes].[ConfiguracionesDetalle]
                     WHERE  [ConfiguracionId] IS NOT NULL
                       AND  [Atributo]        IS NOT NULL";
 
